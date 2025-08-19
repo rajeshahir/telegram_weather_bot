@@ -62,9 +62,16 @@ def plot_forecast(forecast, models, out_path="forecast.png"):
     plt.tight_layout(); plt.savefig(out_path, dpi=140, bbox_inches="tight"); plt.close()
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("🌤 Welcome!
-Use:\n/forecast <lat> <lon> <timezone> <YYYY-MM-DD> <start_hr> <end_hr> <models>\n"
-                                    "Example:\n/forecast 22.26 69.40 Asia/Kolkata 2025-08-19 12 18 GFS,ICON\nSee /models")
+    msg = (
+        "🌤 Welcome!\n"
+        "Use:\n"
+        "/forecast <lat> <lon> <timezone> <YYYY-MM-DD> <start_hr> <end_hr> <models>\n\n"
+        "Example:\n"
+        "/forecast 22.26 69.40 Asia/Kolkata 2025-08-19 12 18 GFS,ICON\n\n"
+        "See /models for supported forecast models."
+    )
+    await update.message.reply_text(msg)
+
 
 async def models_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("Supported models: " + ", ".join(AVAILABLE_MODELS.keys()))
